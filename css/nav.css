@@ -1,0 +1,282 @@
+header{
+    width: 100%;
+    height: auto;  
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    
+    display: flex;
+    top: 0;
+    justify-content:center;
+    position:fixed;
+    z-index:10;
+
+    padding:12px 0px;
+}
+
+
+/* Esto lo jalé de lo que tenías realizado */
+header a h3{
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--fuenteLetra);
+    
+}
+
+
+
+
+/*========= Overlay Menu ========*/
+.overlayMenu{
+    background-color: rgba(0, 0, 0, 0.206);
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:1;
+    width: 100%;
+    height: 100vh;
+    margin-top:97px;
+    z-index: 0;
+
+    display:none;
+}
+
+/* Se va a utilizar y hacer dinámico luego con Js */
+.displayOverlayMenu{
+    display:block;
+}
+
+
+
+
+/*======== Contenedor General del logo / nav / iconos ========*/
+.containerMenu{
+    display: flex;
+    justify-content:center;
+    width:100%;
+    max-width:1400px;
+    gap:80px;
+    
+
+    /*>>>>>>>>>>>>   Agregar lo siguiente     <<<<<<<<<<<<*/
+    align-items: center;
+    /*padding a los extremos para controlar el ancho del menu*/
+    padding:0px 10px;
+}
+
+
+    /*---------- Contenedor del logo --------------*/
+    .containerOpenLogo{
+        display:flex;
+        align-items: center;
+        justify-content: center; 
+        order:1;
+    }
+
+
+    /*----------- Contenedor de la navegación ------------*/
+    nav{
+        order:2;
+    }
+
+    nav ul{
+        list-style:none;  
+        display:flex;
+        width:auto;
+        padding:0px;
+
+        gap:10px; /* Para poder separar un poco los li */
+    }
+
+    nav ul li a{
+        display:block;  /*>>>>>>>>>>>> Quitarle el display block  <<<<<<<<<<<<<<*/
+        text-decoration:none;
+        color:black;
+        padding:10px;
+        transition:all ease .2s;
+
+        /* Esto lo hiciste tú (Que está bien)*/
+        font-family: var(--fuenteLetra);
+        font-size: 20px;
+        font-weight: 400;
+        
+
+    }
+
+    nav ul li a:hover{
+        background-color: rgb(247, 247, 247); 
+    }
+
+
+
+    /*------------ Contenedor de los iconos/buttons --------------*/
+    .containerButtons{
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+        order:3;
+    }
+
+    .containerIcons{
+        display:flex;
+        justify-content:space-between;
+        align-items: center;
+        cursor:pointer;
+        padding: 10px 10px;
+        gap:10px;
+    }
+
+ 
+
+
+/*-- MENU HAMBURGUESA --*/
+.nav-bar{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    cursor: pointer;
+    width:50px;
+    height:50px;
+    border: 1px solid rgb(230, 230, 230);
+    
+    
+    order:2;
+    display:none;
+    
+}
+
+.nav-bar span{
+    display:flex;
+
+    position: relative;
+    /*
+        Posiciona el span de manera relativa respecto a la posición normal
+        necesario para qye los pseudoelementos (:after y :before)
+        se posicionen de manera absoluta
+    */
+
+    justify-content: center;
+    align-items: center;
+
+    width:30px;
+    height:3px;
+    background-color:black;
+}
+
+/*-- pseudoelementos --*/
+.nav-bar span:after, .nav-bar span:before{
+    content:"";
+    position:absolute;
+    /*Posicionar los pseudoelementos de manera absoluta respecto al span principal*/
+
+    width:100%;
+    height:3px;
+    display:flex;
+    background-color:black;
+}
+
+.nav-bar span:after{top:-8px; transition:all ease .3s;}
+.nav-bar span:before{top:8px; transition: all ease .3s;}
+
+/* Para cerrar (Lo vamos a ver luego con JS)*/
+
+.closeBar span{background-color: transparent;}
+.closeBar span:after{transform:rotate(45deg);top:0px;}
+.closeBar span:before{transform:rotate(-45deg);top:0px;}
+
+/* Fin del menu hamurguesa */
+
+.flexIconMenuO{
+    width:40px;
+    height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    order:1;
+}
+
+
+.flexIconMenuO i{
+    font-size:21px;
+}
+
+.flexIconMenuO:hover{
+    border-radius:50%; /* para que sea en forma de circulo*/
+    background-color: rgb(247, 247, 247); /* Fondo para el contenedor de cada icono */
+}
+
+
+
+
+.mostrar{
+    margin-left:0;
+    transition:all ease .3s;
+}
+
+
+/* 
+Debería ser de esta medida el cambio pero como el menu tiene muchos items en el nav y para evitar estar 
+cambiandole el tamaño de letra y padding directamente cambiaré la medida del max-width 
+@media(max-width:768px){ 
+*/
+
+@media(max-width:1080px){
+    .containerMenu{
+        flex-wrap:wrap;
+        /*>>>>>>>>>>>>   Agregar lo siguiente     <<<<<<<<<<<<*/
+        height:auto;
+        max-height:70px;
+
+        /* Agregamos lo siguiente para que ahora los elementos se distribuyan a extremos*/
+        justify-content: space-between;
+        /* Cambiando el gap de 80 que es mucho pero funcionaba para la vista pc a un gap 0 para que los elemntos de los extremos (logo e iconos ) puedan juntarse hasta el máximo */
+        gap:0px;
+    }
+
+    /*---- QUITANDO EL GAP 10 DE .containerIcons*/
+    .containerIcons{
+        gap:0px;
+    }
+
+    /*-- Cambiando el orden --*/
+    .containerOpenLogo{
+        order:1;
+    }
+
+    .containerButtons{
+        /*>>>>>>>>>>>>   Se tiene que pasar el order a 3 para el nav  <<<<<<<<<<<<*/
+        order: 3;
+    }
+    
+
+    nav{
+          /*>>>>>>>>>>>>   Se tiene que pasar el order a 2 para el nav  <<<<<<<<<<<<*/
+        order:2;
+    } 
+
+
+    /* Fin del reodenamiento */
+
+    nav ul{
+      flex-direction:column;
+      position:absolute;
+      top:0;
+      left:0;
+      width:300px; 
+      background-color:white;
+      margin-top:96px;
+      margin-left:-100%;
+
+
+      
+      height:100vh;
+
+
+    }
+
+    .nav-bar{
+        display:flex;
+    }
+
+}    
